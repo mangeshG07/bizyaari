@@ -1,0 +1,29 @@
+class Images {
+  static const logo = 'assets/images/ic_logo.png';
+  static const logoVert = 'assets/images/ic_logo_vert.png';
+  static const noInternet = 'assets/images/no_internet_connection.png';
+  static const intro_1 = 'assets/images/ic_intro_1.png';
+  static const intro_2 = 'assets/images/ic_intro_2.png';
+  static const intro_3 = 'assets/images/ic_intro_3.png';
+  static const restaurants = 'assets/new_icon/ic_restaurant.png';
+  static const fitness = 'assets/new_icon/ic_fitness.png';
+  static const music = 'assets/new_icon/ic_music.png';
+  static const salon = 'assets/new_icon/ic_salon.png';
+  static const hospital = 'assets/new_icon/ic_hospital.png';
+  static const book = 'assets/new_icon/ic_book.png';
+  static const hotel = 'assets/new_icon/ic_hotels.png';
+  static const paint = 'assets/new_icon/ic_paint.png';
+  static const hotelImg = 'assets/images/hotel_img.png';
+  static const feedImg = 'assets/images/feed_img.png';
+  static const noBusiness = 'assets/new_icon/ic_no_business.png';
+  static const noData = 'assets/images/no_data_found.png';
+  static const emptyBusiness = 'assets/images/empty_business.png';
+  static const defaultImage = 'assets/images/default.png';
+  static const defaultSlider = 'assets/images/default_slider.jpg';
+  static const appIcon = 'assets/images/app_icon.png';
+  static const logoText = 'assets/images/logo_text.png';
+  static const appMaintenance = 'assets/images/app_maintenance.png';
+  static const noNotification = 'assets/images/ic_notitication.png';
+  static const video = 'assets/icons/ic_video.png';
+  static const sendReq = 'assets/icons/ic_send_req.png';
+}

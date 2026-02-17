@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "209976468536",
+    "project_id": "bizyaari",
+    "storage_bucket": "bizyaari.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:209976468536:android:0ccb3d4aea13d25ddb32cd",
+        "android_client_info": {
+          "package_name": "com.bizyaari.android"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDXiorGfDV1A0_4oTuTUzSnJOdhRS69izI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
