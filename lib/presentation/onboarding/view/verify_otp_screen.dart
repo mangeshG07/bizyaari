@@ -13,21 +13,32 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> with CodeAutoFill {
 
   @override
   void initState() {
+    super.initState();
     controller.startTimer();
     listenForCode();
-    super.initState();
+    SmsAutoFill().getAppSignature.then((value) {
+    });
   }
 
+  /// Extract OTP from full SMS
+  String _extractOtp(String sms) {
+    final exp = RegExp(r'\b\d{6}\b');
+    return exp.firstMatch(sms)?.group(0) ?? "";
+  }
+
+  /// This method is triggered when SMS is received
   @override
   void codeUpdated() {
-    controller.otpController.text = code!;
-    // print('OTP Received: ${controller.otpController.text}');
+    if (code != null) {
+      String extractedOtp = _extractOtp(code!);
+
+      controller.otpController.text = extractedOtp;
+    }
   }
 
   @override
   void dispose() {
     SmsAutoFill().unregisterListener();
-    // controller.otpController.dispose();
     super.dispose();
   }
 
@@ -151,7 +162,6 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> with CodeAutoFill {
           child: Pinput(
             controller: controller.otpController,
             length: 6,
-
             keyboardType: TextInputType.number,
             validator: (value) =>
                 value == null || value.isEmpty ? 'OTP is required' : null,
