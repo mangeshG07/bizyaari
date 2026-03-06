@@ -111,11 +111,11 @@ class _CustomTabBarState extends State<CustomTabBar> {
     // );
   }
 
-  @override
-  void dispose() {
-    ShowcaseView.get().unregister();
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   ShowcaseView.get().unregister();
+  //   super.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {
