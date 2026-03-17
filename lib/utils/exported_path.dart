@@ -132,7 +132,6 @@ export 'package:businessbuddy/common/location_controller.dart';
 export 'package:businessbuddy/common/update_app.dart';
 export 'package:businessbuddy/utils/video_player_controller.dart';
 export 'package:businessbuddy/presentation/home_screen/controller/update_firebase_token.dart';
-export 'package:businessbuddy/presentation/business_partner/controller/disclaimer_controller.dart';
 export 'package:businessbuddy/common/notification_controller.dart';
 export 'package:businessbuddy/presentation/home_screen/controller/home_gate_controller.dart';
 
@@ -145,7 +144,7 @@ export 'package:hugeicons/hugeicons.dart';
 export 'package:get_it/get_it.dart';
 export 'package:injectable/injectable.dart';
 export 'package:shared_preferences/shared_preferences.dart';
-export 'package:internet_connection_checker/internet_connection_checker.dart';
+export 'package:connectivity_plus/connectivity_plus.dart';
 export 'package:package_info_plus/package_info_plus.dart';
 export 'package:introduction_screen/introduction_screen.dart';
 export 'package:pinput/pinput.dart';

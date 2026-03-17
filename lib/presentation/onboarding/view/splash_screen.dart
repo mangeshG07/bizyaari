@@ -1,7 +1,6 @@
 import 'package:flutter/foundation.dart';
 import '../../../utils/exported_path.dart';
 
-
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
@@ -27,9 +26,10 @@ class _SplashScreenState extends State<SplashScreen> {
       final token = await LocalStorage.getString('auth_key');
       final isOnboarded = await LocalStorage.getBool('isOnboarded');
 
-      bool isConnected = await InternetConnectionChecker.instance.hasConnection;
+      final List<ConnectivityResult> connectivityResult = await (Connectivity()
+          .checkConnectivity());
 
-      if (isConnected) {
+      if (!connectivityResult.contains(ConnectivityResult.none)) {
         // Get.offAllNamed(Routes.login);
         token != null
             ? Get.offAllNamed(Routes.mainScreen)

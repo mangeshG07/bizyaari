@@ -149,7 +149,7 @@ class _NavigationScreenState extends State<NavigationScreen> {
           globalKey: controller.businessPartnerKey,
           title: "Business Partner",
           description:
-              "Connect with investors, partners, or experts. Post your needs or explore opportunities to start and grow your business.",
+              "Connect with Local Investors, Search Business Partners Or Experts. Post your requirements or explore opportunities to start your Business or to grow your Business.",
           progressValue: 1,
           child: item,
         ),

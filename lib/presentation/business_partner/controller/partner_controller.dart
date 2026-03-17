@@ -1,5 +1,6 @@
 import 'package:businessbuddy/utils/disclaimer.dart';
 import 'package:businessbuddy/utils/exported_path.dart' hide Position;
+import 'package:intl/intl.dart';
 
 @lazySingleton
 class PartnerDataController extends GetxController {
@@ -116,7 +117,9 @@ class PartnerDataController extends GetxController {
 
         /// 🔹 IMPORTANT
         if (isRefresh || currentBusinessPage == 1) {
-          _checkDisc(data['disclaimer_acceptance_data'] ?? '');
+          _checkDisc(data);
+          // checkDisclaimerTime(data);
+
           requirementList.assignAll(list); // 🔥 replaces list
         } else {
           requirementList.addAll(list); // pagination
@@ -135,12 +138,47 @@ class PartnerDataController extends GetxController {
     }
   }
 
-  void _checkDisc(String data) {
-    if (getIt<DemoService>().isDemo && !isShowDisclaimer.value) {
-      showDisclaimerIfNeeded(data);
-      return;
+  void _checkDisc(Map data) {
+    final demoService = getIt<DemoService>();
+
+    final String htmlData = data['disclaimer_acceptance_data'] ?? '';
+    final bool isAccepted = data['is_disclaimer_accepted'] ?? true;
+    final String lastUpdated = data['disclaimer_last_updated_date_time'] ?? '';
+    final int updateMinutes = data['disclaimer_update_minutes'] ?? 0;
+
+    // /// 🔹 CASE 1: Demo user → always show if not accepted
+    // if () {
+    //   showDisclaimerIfNeeded(htmlData);
+    //   return;
+    // }
+
+    /// 🔹 CASE 2: Normal user → check time condition
+    try {
+      if (lastUpdated.isEmpty || updateMinutes == 0 || !demoService.isDemo && isAccepted) return;
+
+      DateTime backendTime = DateFormat(
+        'MMM dd, yyyy hh:mm a',
+      ).parse(lastUpdated);
+
+      DateTime now = DateTime.now();
+
+      int difference = now.difference(backendTime).inMinutes;
+      print('difference=>>>>>>>>$difference');
+      /// 🔥 Show if time exceeded
+      if (difference > updateMinutes) {
+        showDisclaimerIfNeeded(htmlData);
+      }
+    } catch (e) {
+      print("Disclaimer date error: $e");
     }
   }
+
+  // void _checkDisc(String data) {
+  //   if (getIt<DemoService>().isDemo && !isShowDisclaimer.value) {
+  //     showDisclaimerIfNeeded(data);
+  //     return;
+  //   }
+  // }
 
   /* -------------------- ADD / EDIT /DELETE BUSINESS -------------------- */
 

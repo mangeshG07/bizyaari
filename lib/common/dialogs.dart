@@ -29,14 +29,7 @@ class AllDialogs {
             ElevatedButton(
               style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
               onPressed: () async {
-                final isConnected =
-                    await InternetConnectionChecker.instance.hasConnection;
-                if (isConnected) {
-                  if (Get.isDialogOpen ?? false) Get.back();
-                  // await checkMaintenance();
-                } else {
-                  Get.offAllNamed(Routes.splash);
-                }
+                Get.offAllNamed(Routes.splash);
               },
               child: Text('Retry', style: TextStyle(color: Colors.white)),
             ),
