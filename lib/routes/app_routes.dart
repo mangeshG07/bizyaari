@@ -22,7 +22,7 @@ class AppRoutes {
     GetPage(name: Routes.notificationList, page: () => NotificationList()),
     GetPage(name: Routes.globalSearch, page: () => GlobalSearch()),
     GetPage(name: Routes.followersList, page: () => FollowersList()),
-    GetPage(name: Routes.chat, page: () => ChatView(), binding: ChatBinding()),
+    // GetPage(name: Routes.chat, page: () => ChatView(), binding: ChatBinding()),
     GetPage(name: Routes.tutorials, page: () => TutorialsList()),
     GetPage(name: Routes.helpAndSupport, page: () => HelpSupportScreen()),
     GetPage(name: Routes.blockUserList, page: () => BlockUserList()),

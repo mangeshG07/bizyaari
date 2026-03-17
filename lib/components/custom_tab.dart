@@ -18,21 +18,24 @@ class _CustomTabBarState extends State<CustomTabBar> {
       {
         'icon': HugeIcons.strokeRoundedBriefcase08,
         'label': 'Explorer',
-        'intro': 'Explore businesses & services here',
+        'intro':
+            'Find nearby Stores, Services & Businesses — from grocery and restaurants to salons and plumbers — all in one place.',
         'featureId': 'feature_explorer',
         'key': controller.exploreKey,
       },
       {
         'icon': HugeIcons.strokeRoundedMenuSquare,
         'label': 'Feeds',
-        'intro': 'Check latest feeds & updates',
+        'intro':
+            'Stay updated with the latest Posts, Offers & Business updates from nearby market. The Feeds section allows you to easily browse and filter content based on your Interests, Location or Business Category, helping you discover latest.',
         'featureId': 'feature_feeds',
         'key': controller.feedsKey,
       },
       {
         'icon': HugeIcons.strokeRoundedUser03,
         'label': 'My Business',
-        'intro': 'Manage your business profile here',
+        'intro':
+            'If you are a Business Owner - List and Manage your Business here. Create your Business Profile, add your Services or Products, and help nearby customers discover your Business. A step-by-step listing video is available in the Help section',
         'featureId': 'feature_my_business',
         'key': controller.myBusinessKey,
       },
@@ -41,74 +44,6 @@ class _CustomTabBarState extends State<CustomTabBar> {
     ShowcaseView.register(autoPlayDelay: const Duration(seconds: 3));
 
     controller.initShowcase();
-    // ShowcaseView.register(
-    //   autoPlayDelay: const Duration(seconds: 3),
-    //
-    //   // globalFloatingActionWidget: (showcaseContext) {
-    //   //   return FloatingActionWidget(
-    //   //     top: 100,
-    //   //     right: 20,
-    //   //     child: ElevatedButton(
-    //   //       style: ElevatedButton.styleFrom(
-    //   //         backgroundColor: Colors.red,
-    //   //         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-    //   //       ),
-    //   //       onPressed: () => ShowcaseView.get().dismiss(),
-    //   //       child: const Text("Skip", style: TextStyle(color: Colors.white)),
-    //   //     ),
-    //   //   );
-    //   // },
-    //   // globalFloatingActionWidget: (showcaseContext) => FloatingActionWidget(
-    //   //   left: 16,
-    //   //   bottom: 16,
-    //   //   child: Padding(
-    //   //     padding: const EdgeInsets.all(Dimens.largePadding),
-    //   //     child: ElevatedButton(
-    //   //       onPressed: () => ShowcaseView.get().dismiss(),
-    //   //       style: ElevatedButton.styleFrom(backgroundColor: primaryColor),
-    //   //       child: Row(
-    //   //         spacing: Dimens.padding,
-    //   //         children: [
-    //   //           Icon(Icons.close, color: Colors.white),
-    //   //           const Text('Close', style: TextStyle(color: Colors.white)),
-    //   //         ],
-    //   //       ),
-    //   //     ),
-    //   //   ),
-    //   // ),
-    //   // globalTooltipActions: [
-    //   //   // TooltipActionButton(
-    //   //   //   type: TooltipDefaultActionType.previous,
-    //   //   //   textStyle: const TextStyle(color: Colors.white),
-    //   //   //   backgroundColor: Colors.deepOrange,
-    //   //   //   hideActionWidgetForShowcase: [exploreKey],
-    //   //   // ),
-    //   //   TooltipActionButton(
-    //   //     type: TooltipDefaultActionType.previous,
-    //   //     textStyle: const TextStyle(color: Colors.white),
-    //   //     backgroundColor: Colors.deepOrange,
-    //   //     hideActionWidgetForShowcase: [feedsKey],
-    //   //   ),
-    //   //   TooltipActionButton(
-    //   //     type: TooltipDefaultActionType.next,
-    //   //     textStyle: const TextStyle(color: Colors.white),
-    //   //     backgroundColor: Colors.deepOrange,
-    //   //     hideActionWidgetForShowcase: [myBusinessKey],
-    //   //   ),
-    //   // ],
-    //   onStart: (index, key) {},
-    //   onComplete: (index, key) {},
-    //   onDismiss: (key) {},
-    //   onFinish: () {},
-    // );
-    //
-    // WidgetsBinding.instance.addPostFrameCallback(
-    //   (_) => ShowcaseView.get().startShowCase([
-    //     exploreKey,
-    //     feedsKey,
-    //     myBusinessKey,
-    //   ]),
-    // );
   }
 
   // @override
@@ -199,6 +134,7 @@ class AppShowCaseWidget extends StatelessWidget {
     required this.child,
     required this.index,
     required this.totalSteps,
+    this.isLastFlow = false,
   });
 
   final GlobalKey globalKey;
@@ -208,9 +144,11 @@ class AppShowCaseWidget extends StatelessWidget {
   final Widget child;
   final int index;
   final int totalSteps;
-
+  final bool isLastFlow;
   @override
   Widget build(BuildContext context) {
+    final controller = getIt<NavigationController>();
+
     return Showcase.withWidget(
       key: globalKey,
       targetShapeBorder: const CircleBorder(),
@@ -291,7 +229,17 @@ class AppShowCaseWidget extends StatelessWidget {
                       onPressed: () async {
                         if (index == totalSteps - 1) {
                           ShowcaseView.get().dismiss();
-                          await LocalStorage.setBool('intro_done', true);
+
+                          /// 🔥 If final onboarding → SAVE
+                          if (isLastFlow) {
+                            await LocalStorage.setBool('intro_done', true);
+                          } else {
+                            /// 🔥 Move to next showcase flow
+                            await Future.delayed(
+                              const Duration(milliseconds: 300),
+                            );
+                            controller.startBottomShowcase();
+                          }
                         } else {
                           ShowcaseView.get().next();
                         }

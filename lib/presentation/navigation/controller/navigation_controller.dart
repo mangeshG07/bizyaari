@@ -5,7 +5,7 @@ import '../../../utils/exported_path.dart';
 @lazySingleton
 class NavigationController extends GetxController {
   final currentIndex = 0.obs;
-  final topTabIndex = 1.obs; // default Explorer
+  final topTabIndex = 1.obs;
   final isTopTabSelected = false.obs;
   final RxBool isSubPageOpen = false.obs;
 
@@ -105,6 +105,8 @@ class NavigationController extends GetxController {
   final GlobalKey exploreKey = GlobalKey();
   final GlobalKey feedsKey = GlobalKey();
   final GlobalKey myBusinessKey = GlobalKey();
+  final businessPartnerKey = GlobalKey();
+
   late List<Map<String, dynamic>> tabs;
 
   Future<void> initShowcase() async {
@@ -114,6 +116,13 @@ class NavigationController extends GetxController {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       // if (!mounted) return;
       ShowcaseView.get().startShowCase([exploreKey, feedsKey, myBusinessKey]);
+    });
+
+  }
+  /// 🔥 Start Bottom Showcase
+  void startBottomShowcase() {
+    Future.delayed(const Duration(milliseconds: 400), () {
+      ShowcaseView.get().startShowCase([businessPartnerKey]);
     });
   }
 }

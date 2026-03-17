@@ -117,6 +117,44 @@ class _NavigationScreenState extends State<NavigationScreen> {
     bool isSelected, {
     double? iconSize,
   }) {
+    final controller = getIt<NavigationController>();
+
+    Widget item = Column(
+      children: [
+        Container(
+          decoration: BoxDecoration(
+            color: isSelected ? primaryColor : Colors.transparent,
+            borderRadius: BorderRadius.circular(8.r),
+          ),
+          padding: const EdgeInsets.all(4),
+          child: HugeIcon(
+            size: Get.width * 0.06,
+            icon: icon,
+            color: isSelected ? Colors.white : primaryBlack,
+          ),
+        ),
+        SizedBox(height: 2),
+        Text(label, style: TextStyle(fontSize: 11.sp)),
+      ],
+    );
+
+    /// 🔥 Wrap ONLY Business Partner
+    if (index == 2) {
+      return BottomNavigationBarItem(
+        label: '',
+        icon: AppShowCaseWidget(
+          index: 0,
+          totalSteps: 1,
+          isLastFlow: true,
+          globalKey: controller.businessPartnerKey,
+          title: "Business Partner",
+          description:
+              "Connect with investors, partners, or experts. Post your needs or explore opportunities to start and grow your business.",
+          progressValue: 1,
+          child: item,
+        ),
+      );
+    }
     return BottomNavigationBarItem(
       icon: Column(
         children: [

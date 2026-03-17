@@ -139,7 +139,6 @@ export 'package:businessbuddy/presentation/home_screen/controller/home_gate_cont
 //plugins
 export 'package:get/get.dart';
 export 'package:app_links/app_links.dart';
-export 'package:feature_discovery/feature_discovery.dart';
 export 'package:share_plus/share_plus.dart';
 export 'package:flutter_screenutil/flutter_screenutil.dart';
 export 'package:hugeicons/hugeicons.dart';

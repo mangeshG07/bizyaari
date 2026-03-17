@@ -43,39 +43,37 @@ class MyApp extends StatelessWidget {
             data: themeController.isDark.value
                 ? AppTheme.darkTheme
                 : AppTheme.lightTheme,
-            child: FeatureDiscovery(
-              child: GetMaterialApp(
-                title: 'BizYaari',
-                debugShowCheckedModeBanner: false,
+            child:GetMaterialApp(
+              title: 'BizYaari',
+              debugShowCheckedModeBanner: false,
 
-                /// Routing & bindings
-                initialRoute: Routes.splash,
-                initialBinding: InitialBindings(),
-                getPages: AppRoutes.routes,
+              /// Routing & bindings
+              initialRoute: Routes.splash,
+              initialBinding: InitialBindings(),
+              getPages: AppRoutes.routes,
 
-                /// Theme configuration
-                theme: AppTheme.lightTheme,
-                darkTheme: AppTheme.darkTheme,
-                themeMode: ThemeMode.system,
+              /// Theme configuration
+              theme: AppTheme.lightTheme,
+              darkTheme: AppTheme.darkTheme,
+              themeMode: ThemeMode.system,
 
-                /// Transitions
-                defaultTransition: Transition.fadeIn,
-                transitionDuration: const Duration(milliseconds: 300),
+              /// Transitions
+              defaultTransition: Transition.fadeIn,
+              transitionDuration: const Duration(milliseconds: 300),
 
-                /// Global MediaQuery control
-                builder: (context, child) {
-                  final mediaQueryData = MediaQuery.of(context);
+              /// Global MediaQuery control
+              builder: (context, child) {
+                final mediaQueryData = MediaQuery.of(context);
 
-                  final textScaler = TextScaler.linear(
-                    mediaQueryData.textScaler.scale(1.0).clamp(0.8, 1.0),
-                  );
-                  final newMediaQueryData = mediaQueryData.copyWith(
-                    boldText: false,
-                    textScaler: textScaler,
-                  );
-                  return MediaQuery(data: newMediaQueryData, child: child!);
-                },
-              ),
+                final textScaler = TextScaler.linear(
+                  mediaQueryData.textScaler.scale(1.0).clamp(0.8, 1.0),
+                );
+                final newMediaQueryData = mediaQueryData.copyWith(
+                  boldText: false,
+                  textScaler: textScaler,
+                );
+                return MediaQuery(data: newMediaQueryData, child: child!);
+              },
             ),
           ),
         ),
