@@ -98,20 +98,21 @@ class InboxController extends GetxController {
         ? isSingleLoading.value = showLoading
         : isSingleLoadMore.value = true;
 
-    // if (showLoading) isSingleLoading.value = true;
     final userId = await LocalStorage.getString('user_id') ?? '';
+    print('userId $userId');
+    print('chatId $chatId');
+    print('currentSinglePage $currentSinglePage');
     try {
       final response = await _apiService.getSingleChat(
         userId,
         chatId,
         currentSinglePage.toString(),
       );
-
+      // print('getSingleChat response $response');
       if (response['common']['status'] == true) {
         final data = response['data'];
         singleChat.value = response['data'] ?? {};
         final List list = data['messages'] ?? [];
-
         perSinglePage = data['per_page'] ?? perSinglePage;
         totalSinglePages = data['total_pages'] ?? totalSinglePages;
 
@@ -120,6 +121,7 @@ class InboxController extends GetxController {
           allMessages.assignAll(list); // 🔥 replaces list
         } else {
           allMessages.addAll(list); // pagination
+          print('allMessages response $allMessages');
         }
 
         /// 👇 backend-accurate pagination check
@@ -148,11 +150,9 @@ class InboxController extends GetxController {
         chatId,
         msgController.text.trim(),
       );
-
       if (response['common']['status'] == true) {
-        await getSingleChat(chatId, showLoading: false);
+        await getSingleChat(chatId, showLoading: false, isRefresh: true);
         msgController.clear();
-        // ToastUtils.showSuccessToast(response['common']['message'].toString());
       } else {
         ToastUtils.showErrorToast(response['common']['message'].toString());
       }

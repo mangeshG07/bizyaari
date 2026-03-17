@@ -55,12 +55,13 @@ class _NavigationScreenState extends State<NavigationScreen> {
               ],
             ),
             child: ClipRRect(
-              borderRadius: BorderRadius.vertical(
-                top: Radius.circular(16.r),
-              ),
+              borderRadius: BorderRadius.vertical(top: Radius.circular(16.r)),
               child: BottomNavigationBar(
                 type: BottomNavigationBarType.fixed,
                 backgroundColor: navBackground,
+                selectedFontSize: 12,
+                unselectedFontSize: 11,
+                iconSize: 22,
                 selectedItemColor: controller.currentIndex.value == -1
                     ? Colors.grey
                     : primaryColor,
@@ -117,20 +118,31 @@ class _NavigationScreenState extends State<NavigationScreen> {
     double? iconSize,
   }) {
     return BottomNavigationBarItem(
-      // backgroundColor: scaffoldBackground,
-      icon: Container(
-        decoration: BoxDecoration(
-          color: isSelected ? primaryColor : Colors.transparent,
-          borderRadius: BorderRadius.circular(8.r),
-        ),
-        padding: const EdgeInsets.all(4.0),
-        child: HugeIcon(
-          size: iconSize ?? Get.width * 0.06,
-          icon: icon,
-          color: isSelected ? Colors.white : primaryBlack,
-        ),
+      icon: Column(
+        children: [
+          Container(
+            decoration: BoxDecoration(
+              color: isSelected ? primaryColor : Colors.transparent,
+              borderRadius: BorderRadius.circular(8.r),
+            ),
+            padding: const EdgeInsets.all(4.0),
+            child: HugeIcon(
+              size: iconSize ?? Get.width * 0.06,
+              icon: icon,
+              color: isSelected ? Colors.white : primaryBlack,
+            ),
+          ),
+          SizedBox(height: 2),
+          Text(
+            label,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 11.sp),
+          ),
+        ],
       ),
-      label: label,
+      label: '',
     );
   }
 }

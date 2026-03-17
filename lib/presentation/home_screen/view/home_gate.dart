@@ -1,4 +1,3 @@
-import 'package:businessbuddy/presentation/home_screen/controller/home_gate_controller.dart';
 import 'package:businessbuddy/utils/exported_path.dart';
 
 class HomeGateScreen extends StatefulWidget {
@@ -8,15 +7,30 @@ class HomeGateScreen extends StatefulWidget {
   State<HomeGateScreen> createState() => _HomeGateScreenState();
 }
 
-class _HomeGateScreenState extends State<HomeGateScreen> {
+class _HomeGateScreenState extends State<HomeGateScreen>
+    with WidgetsBindingObserver {
   final controller = getIt<HomeGateController>();
 
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
     WidgetsBinding.instance.addPostFrameCallback((_) {
       controller.startFlow();
     });
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      controller.refreshLocationIfGranted();
+    }
   }
 
   @override
@@ -59,7 +73,7 @@ class _HomeGateScreenState extends State<HomeGateScreen> {
 
       if (!controller.isReady.value) {
         return Scaffold(
-          backgroundColor:Theme.of(context).scaffoldBackgroundColor,
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           body: Center(
             child: Column(
               mainAxisSize: MainAxisSize.min,

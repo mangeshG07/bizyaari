@@ -134,6 +134,7 @@ export 'package:businessbuddy/utils/video_player_controller.dart';
 export 'package:businessbuddy/presentation/home_screen/controller/update_firebase_token.dart';
 export 'package:businessbuddy/presentation/business_partner/controller/disclaimer_controller.dart';
 export 'package:businessbuddy/common/notification_controller.dart';
+export 'package:businessbuddy/presentation/home_screen/controller/home_gate_controller.dart';
 
 //plugins
 export 'package:get/get.dart';

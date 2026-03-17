@@ -13,8 +13,8 @@ class _SingleChatState extends State<SingleChat> {
 
   @override
   void initState() {
-    controller.getSingleChat(widget.chatId, isRefresh: true);
     super.initState();
+    controller.getSingleChat(widget.chatId, isRefresh: true);
   }
 
   @override
@@ -249,7 +249,10 @@ class _SingleChatState extends State<SingleChat> {
 
           Obx(
             () => controller.isSendLoading.isTrue
-                ? LoadingWidget(color: primaryColor, size: 20.r)
+                ? Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: LoadingWidget(color: primaryColor, size: 20.r),
+                  )
                 : IconButton(
                     icon: HugeIcon(
                       icon: HugeIcons.strokeRoundedSent,

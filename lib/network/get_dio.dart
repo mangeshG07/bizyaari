@@ -54,11 +54,15 @@ class DioClient {
           // final requestPath = response.requestOptions.path;
 
           if (response.data.containsKey('user_login') &&
-              response.data.containsKey('message')) {
-            checkLogin(
-              status: response.data['user_login'],
-              message: response.data['message'],
-            );
+              response.data.containsKey('message') &&
+              response.data['user_login'] == false) {
+            final token = await LocalStorage.getString('auth_key');
+            if (token != null && token != 'demo') {
+              checkLogin(
+                status: response.data['user_login'],
+                message: response.data['message'],
+              );
+            }
           }
 
           // if (!requestPath.contains('sign-in')) {
