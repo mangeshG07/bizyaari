@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import '../../../utils/exported_path.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -14,36 +13,9 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    _initialize();
+    controller.initialize();
   }
 
-  Future<void> _initialize() async {
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
-      await Future.delayed(const Duration(seconds: 1));
-      if (NotificationService.hasHandledNotificationNavigation) return;
-      controller.expanded.value = true;
-
-      final token = await LocalStorage.getString('auth_key');
-      final isOnboarded = await LocalStorage.getBool('isOnboarded');
-
-      final List<ConnectivityResult> connectivityResult = await (Connectivity()
-          .checkConnectivity());
-
-      if (!connectivityResult.contains(ConnectivityResult.none)) {
-        // Get.offAllNamed(Routes.login);
-        token != null
-            ? Get.offAllNamed(Routes.mainScreen)
-            : isOnboarded == true
-            ? Get.offAllNamed(Routes.login)
-            : Get.offAllNamed(Routes.onboarding);
-      } else {
-        AllDialogs().noInternetDialog();
-      }
-    });
-  }
-
-  final transitionDuration = const Duration(seconds: 1);
-  final double _bigFontSize = kIsWeb ? 234 : 160;
   @override
   Widget build(BuildContext context) {
     return Obx(
@@ -56,11 +28,13 @@ class _SplashScreenState extends State<SplashScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               AnimatedDefaultTextStyle(
-                duration: transitionDuration,
+                duration: controller.transitionDuration,
                 curve: Curves.fastOutSlowIn,
                 style: TextStyle(
                   color: Theme.of(context).splashColor,
-                  fontSize: !controller.expanded.value ? _bigFontSize : 50,
+                  fontSize: !controller.expanded.value
+                      ? controller.bigFontSize
+                      : 50,
                   fontFamily: 'Montserrat',
                   fontWeight: FontWeight.w600,
                 ),
@@ -85,7 +59,7 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   Widget _logoRemainder() {
-    return Image.asset(Images.logoText, width: Get.width * 0.6.h);
+    return Image.asset(Images.logoText, width: Get.width * 0.6.w);
     // return Image.network('http://192.168.29.37/flutter_splash/public/uploads/splash/flutter_splash.gif', width: Get.width * 0.9.h);
   }
 }

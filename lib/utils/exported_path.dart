@@ -48,7 +48,7 @@ export 'package:businessbuddy/network/all_url.dart';
 export 'package:businessbuddy/utils/color.dart';
 export 'package:businessbuddy/di/injection.config.dart';
 export 'package:businessbuddy/di/injection.dart';
-export 'package:businessbuddy/routes/routes_names.dart';
+export 'package:businessbuddy/routes/app_pages.dart';
 export 'package:businessbuddy/presentation/home_screen/widget/explorer/view/explorer.dart';
 export 'package:businessbuddy/common/common.dart';
 export '../../../../../components/appbar_plain.dart';
@@ -70,6 +70,7 @@ export 'package:businessbuddy/common/helper.dart';
 export 'package:businessbuddy/utils/like_animation.dart';
 export 'package:businessbuddy/presentation/home_screen/widget/feeds/widget/single_post.dart';
 export 'package:businessbuddy/presentation/special_offer/widget/single_offer.dart';
+export 'package:businessbuddy/common/popup_manager.dart';
 
 //component
 export 'package:businessbuddy/components/screenutil_config.dart';

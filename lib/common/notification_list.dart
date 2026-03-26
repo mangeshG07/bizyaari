@@ -154,7 +154,7 @@ class _NotificationListState extends State<NotificationList> {
 
     Get.to(
       () => InstagramPostView(
-        isFrom: '',
+        isFrom: 'notification',
         refresh: () {},
         followButton: const SizedBox(),
         postId: postId,

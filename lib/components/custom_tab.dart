@@ -43,7 +43,7 @@ class _CustomTabBarState extends State<CustomTabBar> {
 
     ShowcaseView.register(autoPlayDelay: const Duration(seconds: 3));
 
-    controller.initShowcase();
+    // controller.initShowcase();
   }
 
   // @override
@@ -61,7 +61,9 @@ class _CustomTabBarState extends State<CustomTabBar> {
         margin: EdgeInsets.symmetric(vertical: 8.h),
         decoration: BoxDecoration(
           color: Theme.of(context).scaffoldBackgroundColor,
-          border: Border.symmetric(horizontal: BorderSide(color: primaryColor)),
+          border: Border.symmetric(
+            horizontal: BorderSide(color: primaryColor, width: 2),
+          ),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -102,7 +104,7 @@ class _CustomTabBarState extends State<CustomTabBar> {
                             controller.tabs[index]['label'],
                             textAlign: TextAlign.center,
                             style: TextStyle(
-                              fontSize: 12.sp,
+                              fontSize: 13.sp,
                               fontWeight: isSelected
                                   ? FontWeight.w600
                                   : FontWeight.w400,

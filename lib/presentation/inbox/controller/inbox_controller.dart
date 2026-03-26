@@ -99,9 +99,7 @@ class InboxController extends GetxController {
         : isSingleLoadMore.value = true;
 
     final userId = await LocalStorage.getString('user_id') ?? '';
-    print('userId $userId');
-    print('chatId $chatId');
-    print('currentSinglePage $currentSinglePage');
+
     try {
       final response = await _apiService.getSingleChat(
         userId,
@@ -121,7 +119,7 @@ class InboxController extends GetxController {
           allMessages.assignAll(list); // 🔥 replaces list
         } else {
           allMessages.addAll(list); // pagination
-          print('allMessages response $allMessages');
+
         }
 
         /// 👇 backend-accurate pagination check

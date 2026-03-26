@@ -19,9 +19,9 @@ class CustomMainHeader2 extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 8.w).copyWith(top: 16.h),
           decoration: BoxDecoration(
             gradient: LinearGradient(
-              // colors: [primaryColor.withValues(alpha: 0.5), Colors.white],
               colors: Theme.of(context).brightness == Brightness.light
-                  ? [primaryColor.withValues(alpha: 0.5), Colors.white]
+                  // ? [primaryColor.withValues(alpha: 0.5), Colors.white]
+                  ? [primaryColor, Colors.white]
                   : [primaryColor, Colors.black54],
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,

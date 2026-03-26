@@ -26,4 +26,5 @@ class Images {
   static const noNotification = 'assets/images/ic_notitication.png';
   static const video = 'assets/icons/ic_video.png';
   static const sendReq = 'assets/icons/ic_send_req.png';
+  static const alertIcon = 'assets/new_icon/ic_alert.png';
 }

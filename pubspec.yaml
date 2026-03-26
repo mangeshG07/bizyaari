@@ -81,6 +81,7 @@ dependencies:
   app_links: ^6.4.1
   flutter_svg: ^2.2.3
   showcaseview: ^5.0.1
+  auto_size_text: ^3.0.0
 
 dev_dependencies:
   flutter_test:

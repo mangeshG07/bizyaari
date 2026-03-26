@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:businessbuddy/utils/exported_path.dart';
 
 class NavigationScreen extends StatefulWidget {
@@ -40,9 +41,10 @@ class _NavigationScreenState extends State<NavigationScreen> {
           bottomNavigationBar: Container(
             decoration: BoxDecoration(
               color: primaryColor,
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(16.r),
-                topRight: Radius.circular(16.r),
+              // borderRadius: BorderRadius.circular(16.r),
+              border: Border(
+                top: BorderSide(color: primaryColor, width: 2),
+                bottom: BorderSide(color: primaryColor, width: 2),
               ),
               boxShadow: [
                 BoxShadow(
@@ -55,7 +57,12 @@ class _NavigationScreenState extends State<NavigationScreen> {
               ],
             ),
             child: ClipRRect(
-              borderRadius: BorderRadius.vertical(top: Radius.circular(16.r)),
+              // borderRadius: BorderRadius.vertical(
+              //   top: Radius.circular(16.r),
+              //
+              //   // topLeft: Radius.circular(16.r),
+              //   // topRight: Radius.circular(16.r),
+              // ),
               child: BottomNavigationBar(
                 type: BottomNavigationBarType.fixed,
                 backgroundColor: navBackground,
@@ -123,18 +130,27 @@ class _NavigationScreenState extends State<NavigationScreen> {
       children: [
         Container(
           decoration: BoxDecoration(
-            color: isSelected ? primaryColor : Colors.transparent,
+            // color: isSelected ? primaryColor : Colors.transparent,
+            border: Border.all(
+              color: isSelected ? primaryColor : Colors.transparent,
+            ),
             borderRadius: BorderRadius.circular(8.r),
           ),
           padding: const EdgeInsets.all(4),
           child: HugeIcon(
             size: Get.width * 0.06,
             icon: icon,
-            color: isSelected ? Colors.white : primaryBlack,
+            color: isSelected ? primaryColor : primaryBlack,
           ),
         ),
         SizedBox(height: 2),
-        Text(label, style: TextStyle(fontSize: 11.sp)),
+        AutoSizeText(
+          label,
+          style: TextStyle(fontSize: 13),
+          minFontSize: 13,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+        ),
       ],
     );
 
@@ -160,24 +176,35 @@ class _NavigationScreenState extends State<NavigationScreen> {
         children: [
           Container(
             decoration: BoxDecoration(
-              color: isSelected ? primaryColor : Colors.transparent,
+              border: Border.all(
+                color: isSelected ? primaryColor : Colors.transparent,
+              ),
+              // color: isSelected ? primaryColor : Colors.transparent,
               borderRadius: BorderRadius.circular(8.r),
             ),
             padding: const EdgeInsets.all(4.0),
             child: HugeIcon(
               size: iconSize ?? Get.width * 0.06,
               icon: icon,
-              color: isSelected ? Colors.white : primaryBlack,
+              color: isSelected ? primaryColor : primaryBlack,
             ),
           ),
           SizedBox(height: 2),
-          Text(
+          AutoSizeText(
             label,
-            maxLines: 2,
+            style: TextStyle(fontSize: 14),
+            minFontSize: 14,
+            maxLines: 4,
             overflow: TextOverflow.ellipsis,
-            textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 11.sp),
           ),
+
+          // Text(
+          //   label,
+          //   maxLines: 2,
+          //   overflow: TextOverflow.ellipsis,
+          //   textAlign: TextAlign.center,
+          //   style: TextStyle(fontSize: 11.sp),
+          // ),
         ],
       ),
       label: '',

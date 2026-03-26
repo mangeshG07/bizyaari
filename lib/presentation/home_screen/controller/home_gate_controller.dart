@@ -5,47 +5,58 @@ import '../../../utils/exported_path.dart';
 class HomeGateController extends GetxController {
   final homeController = getIt<HomeController>();
   final locationController = getIt<LocationController>();
+  final searchController = getIt<SearchNewController>();
 
   final isReady = false.obs;
   final hasError = false.obs;
   final statusMessage = 'Starting…'.obs;
 
-  @override
-  void onInit() {
-    super.onInit();
-    // start flow after UI ready
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      startFlow();
-    });
-  }
-
   Future<void> startFlow() async {
     try {
-      if (getIt<SearchNewController>().address.value.isEmpty) {
+      if (searchController.address.value.isEmpty) {
         statusMessage.value = "Checking location permission...";
 
-        final permissionGranted = await homeController
+        final permissionGranted = await locationController
             .requestLocationPermission();
 
         if (!permissionGranted) {
           /// fallback Pune
+          PopupManager().add(AllDialogs().showLocationDialog);
+
           statusMessage.value = "Using default location: Pune";
 
           locationController.updateLocation(lat: 18.5204, lng: 73.8567);
-
-          getIt<SearchNewController>().getLiveLocation(forcePune: true);
+          searchController.getLiveLocation(forcePune: true);
         } else {
           statusMessage.value = "Getting your location...";
 
           await locationController.fetchInitialLocation();
-
-          getIt<SearchNewController>().getLiveLocation();
+          searchController.getLiveLocation();
         }
 
         statusMessage.value = "Loading nearby data...";
-
         await homeController.getHomeApi();
 
+        PopupManager().add(checkInternetAndShowPopup);
+        PopupManager().add(getIt<UpdateController>().checkForUpdate);
+
+        /// ✅ 🔥 ADD SHOWCASE AT LAST
+        PopupManager().add(() async {
+          final isDone = await LocalStorage.getBool('intro_done') ?? false;
+
+          if (!isDone) {
+            final navController = getIt<NavigationController>();
+
+            /// wait UI ready
+            await Future.delayed(const Duration(milliseconds: 500));
+
+            navController.startTopShowcase();
+          }
+        });
+        PopupManager().add(homeController.showAlertSheet);
+
+        /// Optional: wait before showing UI
+        await PopupManager().waitUntilDone();
         isReady.value = true;
       } else {
         await homeController.getHomeApi();
@@ -67,7 +78,7 @@ class HomeGateController extends GetxController {
 
       await locationController.fetchInitialLocation();
 
-      getIt<SearchNewController>().getLiveLocation();
+      searchController.getLiveLocation();
 
       await homeController.getHomeApi();
     }

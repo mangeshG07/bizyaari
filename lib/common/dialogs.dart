@@ -1,10 +1,11 @@
 import 'dart:io';
 import 'package:businessbuddy/utils/exported_path.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:geolocator/geolocator.dart';
 
 class AllDialogs {
-  void noInternetDialog() {
-    Get.dialog(
+  Future<void> noInternetDialog() async {
+    await Get.dialog(
       PopScope(
         canPop: false,
         child: AlertDialog(
@@ -242,6 +243,115 @@ class AllDialogs {
       restaurantName: offer['business_name'] ?? '',
       offerTitle: offer['details'] ?? '',
       dateRange: '${offer['start_date'] ?? ''} to ${offer['end_date'] ?? ''}  ',
+    );
+  }
+
+  Future<void> showLocationDialog() async {
+    if (Get.overlayContext == null) return;
+
+    await Get.dialog(
+      Dialog(
+        insetPadding: const EdgeInsets.all(20),
+        backgroundColor: Colors.transparent,
+        surfaceTintColor: Colors.transparent,
+        child: Container(
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(28),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withValues(alpha: 0.1),
+                blurRadius: 20,
+                offset: const Offset(0, 10),
+              ),
+            ],
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(24),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                // Animated icon container
+                Container(
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    color: primaryColor.withValues(alpha: 0.05),
+                    shape: BoxShape.circle,
+                  ),
+                  child: HugeIcon(
+                    icon: HugeIcons.strokeRoundedLocationOffline03,
+                    size: 48,
+                    color: primaryColor,
+                  ),
+                ),
+
+                const SizedBox(height: 20),
+
+                // Title with better typography
+                Text(
+                  "Location Access Required",
+                  style: TextStyle(
+                    fontSize: 20.sp,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.black87,
+                    letterSpacing: -0.5,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+
+                const SizedBox(height: 12),
+
+                // Description with improved readability
+                Text(
+                  "To provide you with the best experience and accurate services, we need access to your location.",
+                  style: TextStyle(
+                    fontSize: 14.sp,
+                    color: Colors.black54,
+                    height: 1.5,
+                    letterSpacing: 0.2,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+
+                Column(
+                  spacing: 12.h,
+                  children: [
+                    Divider(),
+
+                    GestureDetector(
+                      onTap: () async {
+                        Get.back();
+                        await Geolocator.openLocationSettings();
+                      },
+                      child: Text(
+                        "Open Settings",
+                        style: TextStyle(
+                          fontSize: 15.sp,
+                          color: primaryColor,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+
+                    Divider(),
+                    GestureDetector(
+                      onTap: () => Get.back(),
+                      child: Text(
+                        "Not Now",
+                        style: TextStyle(
+                          fontSize: 15.sp,
+                          color: Colors.grey,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

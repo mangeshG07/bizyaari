@@ -55,8 +55,8 @@ class UpdateController extends GetxController {
   }
 
   /// Show Update Dialog
-  void _showUpdateDialog() {
-    Get.dialog(
+  Future<void> _showUpdateDialog() async {
+    await Get.dialog(
       PopScope(
         canPop: false,
         child: AlertDialog(

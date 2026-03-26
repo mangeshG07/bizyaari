@@ -95,7 +95,7 @@ class _EditRecruitmentState extends State<EditRecruitment> {
                 child: const Icon(Icons.arrow_back),
               ),
               CustomText(
-                title: 'Edit Post Recruitment',
+                title: 'Edit Post Requirement',
                 fontSize: 18.sp,
                 fontWeight: FontWeight.bold,
                 color: primaryBlack,
@@ -139,13 +139,13 @@ class _EditRecruitmentState extends State<EditRecruitment> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _buildLabel('Recruitment Title'),
+        _buildLabel('Requirement Title'),
         buildTextField(
           fillColor: Theme.of(context).scaffoldBackgroundColor,
           controller: controller.recTitle,
-          hintText: 'Enter your Recruitment Title',
+          hintText: 'Enter your Requirement Title',
           validator: (value) =>
-              value!.trim().isEmpty ? 'Please enter Recruitment Title' : null,
+              value!.trim().isEmpty ? 'Please enter Requirement Title' : null,
         ),
       ],
     );

@@ -143,18 +143,20 @@ class PartnerDataController extends GetxController {
 
     final String htmlData = data['disclaimer_acceptance_data'] ?? '';
     final bool isAccepted = data['is_disclaimer_accepted'] ?? true;
-    final String lastUpdated = data['disclaimer_last_updated_date_time'] ?? '';
+    final String? lastUpdated = data['disclaimer_last_updated_date_time'] ?? '';
     final int updateMinutes = data['disclaimer_update_minutes'] ?? 0;
 
-    // /// 🔹 CASE 1: Demo user → always show if not accepted
-    // if () {
-    //   showDisclaimerIfNeeded(htmlData);
-    //   return;
-    // }
+    /// 🔹 CASE 1: Demo user + not accepted (extra safety)
+    if (demoService.isDemo && !isAccepted) {
+      showDisclaimerIfNeeded(htmlData);
+      return;
+    }
 
     /// 🔹 CASE 2: Normal user → check time condition
     try {
-      if (lastUpdated.isEmpty || updateMinutes == 0 || !demoService.isDemo && isAccepted) return;
+      if (lastUpdated!.isEmpty || updateMinutes == 0) {
+        return;
+      }
 
       DateTime backendTime = DateFormat(
         'MMM dd, yyyy hh:mm a',
@@ -163,13 +165,13 @@ class PartnerDataController extends GetxController {
       DateTime now = DateTime.now();
 
       int difference = now.difference(backendTime).inMinutes;
-      print('difference=>>>>>>>>$difference');
+
       /// 🔥 Show if time exceeded
       if (difference > updateMinutes) {
         showDisclaimerIfNeeded(htmlData);
       }
     } catch (e) {
-      print("Disclaimer date error: $e");
+      debugPrint("Disclaimer date error: $e");
     }
   }
 
@@ -347,7 +349,6 @@ class PartnerDataController extends GetxController {
         userId,
         businessId,
       );
-      // print('response================>$response');
       if (response['common']['status'] == true) {
         await getBusinessRequired(isRefresh: true);
         ToastUtils.showSuccessToast(response['common']['message']);
@@ -469,7 +470,12 @@ class PartnerDataController extends GetxController {
     try {
       final response = await _apiService.acceptDisclaimer(data, userId);
       if (response['common']['status'] == true) {
-        Get.back();
+        /// ✅ FIXED: always close dialog safely
+        Future.delayed(const Duration(milliseconds: 100), () {
+          if (Get.key.currentState?.canPop() ?? false) {
+            Get.back();
+          }
+        });
         ToastUtils.showSuccessToast(response['common']['message']);
       } else {
         Get.back();

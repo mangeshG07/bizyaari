@@ -1,5 +1,6 @@
 import 'package:businessbuddy/common/live_location.dart';
 import 'package:businessbuddy/utils/exported_path.dart';
+import 'package:geolocator/geolocator.dart';
 
 @lazySingleton
 class LocationController extends GetxController {
@@ -38,4 +39,30 @@ class LocationController extends GetxController {
 
   Future<bool> get isManual async =>
       await LocalStorage.getString('address_source') == 'manual';
+
+
+  /// ✅ ONLY returns true/false (NO UI here)
+  Future<bool> requestLocationPermission() async {
+    try {
+      final serviceEnabled = await Geolocator.isLocationServiceEnabled();
+      if (!serviceEnabled) return false;
+
+      var permission = await Geolocator.checkPermission();
+
+      if (permission == LocationPermission.denied) {
+        permission = await Geolocator.requestPermission();
+      }
+
+      if (permission == LocationPermission.denied ||
+          permission == LocationPermission.deniedForever) {
+        return false;
+      }
+
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
 }
+
+

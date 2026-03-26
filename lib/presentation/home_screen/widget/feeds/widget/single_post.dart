@@ -103,11 +103,16 @@ class _InstagramPostViewState extends State<InstagramPostView> {
 
   void _handleBack() {
     if (Get.isBottomSheetOpen ?? false) {
-      Navigator.of(context).pop(); // close only bottomsheet
+      Navigator.of(context).pop();
       return;
     }
 
     if (widget.isFrom == 'deep') {
+      Get.offAllNamed(Routes.mainScreen);
+      return;
+    }
+
+    if (widget.isFrom == 'notification') {
       Get.offAllNamed(Routes.mainScreen);
       return;
     }
@@ -339,7 +344,8 @@ class _InstagramPostViewState extends State<InstagramPostView> {
     }
     Get.bottomSheet(
       CommentsBottomSheet(
-        isSingle: true,
+        isPost: true,
+        isSingle: widget.isFrom == 'notification' ? false : true,
         postId: controller.singlePost['id']?.toString() ?? '',
       ),
       isDismissible: true,

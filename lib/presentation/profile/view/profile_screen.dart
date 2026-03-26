@@ -1,4 +1,5 @@
 import 'dart:ui';
+import '../../../common/dark_light.dart';
 import '../../../common/policy_data.dart';
 import '../../../utils/exported_path.dart';
 
@@ -63,7 +64,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
       surfaceTintColor: Theme.of(context).scaffoldBackgroundColor,
       foregroundColor: primaryBlack,
       elevation: 0,
-      centerTitle: true,
+      titleSpacing: 0,
+      centerTitle: false,
       flexibleSpace: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
@@ -172,14 +174,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget _ownerActions() {
     return Row(
       children: [
-        IconButton(
-          onPressed: () => getIt<ThemeController>().toggleTheme(),
-          icon: HugeIcon(
-            icon: Theme.of(context).brightness == Brightness.light
-                ? HugeIcons.strokeRoundedSun01
-                : HugeIcons.strokeRoundedMoon02,
-            color: primaryBlack,
-          ),
+        // IconButton(
+        //   onPressed: () => getIt<ThemeController>().toggleTheme(),
+        //   icon: HugeIcon(
+        //     icon: Theme.of(context).brightness == Brightness.light
+        //         ? HugeIcons.strokeRoundedSun01
+        //         : HugeIcons.strokeRoundedMoon02,
+        //     color: primaryBlack,
+        //   ),
+        // ),
+        const ThemeToggleButton(
+          showLabel: true,
+          labelPosition: LabelPosition.left,
         ),
         IconButton(
           onPressed: () => Get.toNamed(Routes.editProfile),

@@ -2,7 +2,7 @@ import 'package:businessbuddy/utils/exported_path.dart';
 
 class CustomButton extends StatelessWidget {
   final RxBool isLoading;
-  final VoidCallback onPressed;
+  final dynamic onPressed;
   final String text;
   final Color backgroundColor;
   final double? width;

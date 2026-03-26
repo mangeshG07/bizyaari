@@ -48,9 +48,9 @@ class MyApp extends StatelessWidget {
               debugShowCheckedModeBanner: false,
 
               /// Routing & bindings
-              initialRoute: Routes.splash,
               initialBinding: InitialBindings(),
               getPages: AppRoutes.routes,
+              initialRoute: Routes.splash,
 
               /// Theme configuration
               theme: AppTheme.lightTheme,

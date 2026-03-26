@@ -1,4 +1,5 @@
 import 'exported_path.dart';
+import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 
 class DisclaimerDialog extends StatelessWidget {
   DisclaimerDialog({super.key, required this.data});
@@ -21,18 +22,27 @@ class DisclaimerDialog extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                'Disclaimer',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              Row(
+                children: [
+                  HugeIcon(
+                    icon: HugeIcons.strokeRoundedAlert01,
+                    color: Colors.red,
+                  ),
+
+                  const SizedBox(width: 12),
+                  const Text(
+                    'Disclaimer',
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
+                ],
               ),
-              const SizedBox(height: 12),
 
               /// ✅ Only content scrolls
               Flexible(
                 child: SingleChildScrollView(
-                  child: Text(
+                  child: HtmlWidget(
                     data,
-                    style: TextStyle(fontSize: 14.sp, height: 1.5),
+                    textStyle: TextStyle(fontSize: 14.sp, height: 1.5),
                   ),
                 ),
               ),
@@ -64,21 +74,35 @@ class DisclaimerDialog extends StatelessWidget {
                 () => getIt<PartnerDataController>().isDisLoading.value
                     ? LoadingWidget(color: primaryColor)
                     : Obx(
-                        () => Center(
-                          child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: primaryColor,
-                              foregroundColor: Colors.white,
-                            ),
-                            onPressed: isChecked.value
-                                ? () async {
-                                    await getIt<PartnerDataController>()
-                                        .acceptDisclaimer(data);
-                                  }
-                                : null, // disables button
-                            child: const Text('I Agree'),
-                          ),
+                        () => CustomButton(
+                          backgroundColor: primaryColor,
+                          width: double.infinity,
+                          text: 'I Agree',
+                          isLoading:
+                              getIt<PartnerDataController>().isDisLoading,
+                          onPressed: isChecked.value
+                              ? () async {
+                                  await getIt<PartnerDataController>()
+                                      .acceptDisclaimer(data);
+                                }
+                              : null,
                         ),
+
+                        // Center(
+                        //   child: ElevatedButton(
+                        //     style: ElevatedButton.styleFrom(
+                        //       backgroundColor: primaryColor,
+                        //       foregroundColor: Colors.white,
+                        //     ),
+                        //     onPressed: isChecked.value
+                        //         ? () async {
+                        //             await getIt<PartnerDataController>()
+                        //                 .acceptDisclaimer(data);
+                        //           }
+                        //         : null, // disables button
+                        //     child: const Text('I Agree'),
+                        //   ),
+                        // ),
                       ),
               ),
             ],

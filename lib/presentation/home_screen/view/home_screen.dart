@@ -31,20 +31,21 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      checkInternetAndShowPopup();
-
-      // 🚀 Load Home immediately
-      // _homeController.isMainLoading.value = true;
-      // _homeController.getHomeApi().then((_) {
-      //   _homeController.isMainLoading.value = false;
-      // });
-
-      // 🔄 Background tasks
-      // getIt<LocationController>().fetchInitialLocation();
-      // getIt<SearchNewController>().getLiveLocation();
-      getIt<UpdateController>().checkForUpdate();
-    });
+    // WidgetsBinding.instance.addPostFrameCallback((_) {
+    //   checkInternetAndShowPopup();
+    //
+    //   // 🚀 Load Home immediately
+    //   // _homeController.isMainLoading.value = true;
+    //   // _homeController.getHomeApi().then((_) {
+    //   //   _homeController.isMainLoading.value = false;
+    //   // });
+    //
+    //   // 🔄 Background tasks
+    //   // getIt<LocationController>().fetchInitialLocation();
+    //   // getIt<SearchNewController>().getLiveLocation();
+    //   getIt<UpdateController>().checkForUpdate();
+    //   _homeController.showAlertSheet();
+    // });
   }
 
   // @override

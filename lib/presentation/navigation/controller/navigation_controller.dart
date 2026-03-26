@@ -102,23 +102,38 @@ class NavigationController extends GetxController {
   }
 
   //custom Tab data//
-  final GlobalKey exploreKey = GlobalKey();
-  final GlobalKey feedsKey = GlobalKey();
-  final GlobalKey myBusinessKey = GlobalKey();
+  final exploreKey = GlobalKey();
+  final feedsKey = GlobalKey();
+  final myBusinessKey = GlobalKey();
   final businessPartnerKey = GlobalKey();
-
+  var isShowcaseRunning = false.obs;
   late List<Map<String, dynamic>> tabs;
 
-  Future<void> initShowcase() async {
-    final isIntroDone = await LocalStorage.getBool('intro_done');
+  // Future<void> initShowcase() async {
+  //   final isDone = await LocalStorage.getBool('intro_done') ?? false;
+  //
+  //   if (!isDone) {
+  //     WidgetsBinding.instance.addPostFrameCallback((_) {
+  //       Future.delayed(const Duration(milliseconds: 300), () {
+  //         startTopShowcase();
+  //       });
+  //     });
+  //   }
+  //   // WidgetsBinding.instance.addPostFrameCallback((_) {
+  //   //   // if (!mounted) return;
+  //   //   ShowcaseView.get().startShowCase([exploreKey, feedsKey, myBusinessKey]);
+  //   // });
+  // }
 
-    if (isIntroDone == true) return;
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      // if (!mounted) return;
-      ShowcaseView.get().startShowCase([exploreKey, feedsKey, myBusinessKey]);
-    });
+  /// 🔥 TOP SHOWCASE
+  void startTopShowcase() {
+    if (isShowcaseRunning.value) return;
 
+    isShowcaseRunning.value = true;
+
+    ShowcaseView.get().startShowCase([exploreKey, feedsKey, myBusinessKey]);
   }
+
   /// 🔥 Start Bottom Showcase
   void startBottomShowcase() {
     Future.delayed(const Duration(milliseconds: 400), () {

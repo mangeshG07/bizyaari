@@ -8,7 +8,7 @@ class Routes {
   static const String register = '/register';
   static const String mainScreen = '/mainScreen';
   static const String catList = '/catList';
-  static const String catDetails = '/mainScreen';
+  // static const String catDetails = '/mainScreen';
   static const String addPost = '/addPost';
   static const String editPost = '/editPost';
   static const String addOffer = '/addOffer';
