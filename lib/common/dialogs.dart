@@ -170,7 +170,7 @@ class AllDialogs {
     Get.dialog(
       Dialog(
         surfaceTintColor: Theme.of(Get.context!).scaffoldBackgroundColor,
-        backgroundColor: Theme.of(Get.context!).scaffoldBackgroundColor,
+        backgroundColor: Theme.of(Get.context!).cardColor,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16.r),
         ),
@@ -248,6 +248,7 @@ class AllDialogs {
 
   Future<void> showLocationDialog() async {
     if (Get.overlayContext == null) return;
+    final isDark = Get.theme.brightness == Brightness.dark;
 
     await Get.dialog(
       Dialog(
@@ -256,7 +257,7 @@ class AllDialogs {
         surfaceTintColor: Colors.transparent,
         child: Container(
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: Get.theme.cardColor,
             borderRadius: BorderRadius.circular(28),
             boxShadow: [
               BoxShadow(
@@ -275,13 +276,15 @@ class AllDialogs {
                 Container(
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
-                    color: primaryColor.withValues(alpha: 0.05),
+                    color: primaryColor.withValues(alpha: isDark ? 0.15 : 0.05),
                     shape: BoxShape.circle,
                   ),
                   child: HugeIcon(
                     icon: HugeIcons.strokeRoundedLocationOffline03,
                     size: 48,
-                    color: primaryColor,
+                    color: isDark
+                        ? primaryColor.withValues(alpha: 0.9) // slightly softer
+                        : primaryColor,
                   ),
                 ),
 
@@ -293,7 +296,7 @@ class AllDialogs {
                   style: TextStyle(
                     fontSize: 20.sp,
                     fontWeight: FontWeight.w700,
-                    color: Colors.black87,
+                    color: textLightGrey,
                     letterSpacing: -0.5,
                   ),
                   textAlign: TextAlign.center,
@@ -306,7 +309,7 @@ class AllDialogs {
                   "To provide you with the best experience and accurate services, we need access to your location.",
                   style: TextStyle(
                     fontSize: 14.sp,
-                    color: Colors.black54,
+                    color: textSmall,
                     height: 1.5,
                     letterSpacing: 0.2,
                   ),

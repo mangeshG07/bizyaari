@@ -9,7 +9,7 @@ class AlertBottomsheet extends StatelessWidget {
     return Container(
       padding: EdgeInsets.fromLTRB(20.w, 20.w, 20.w, 32.w),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Theme.of(context).cardColor,
         borderRadius: BorderRadius.vertical(top: Radius.circular(24.r)),
         boxShadow: [
           BoxShadow(
@@ -66,6 +66,7 @@ class AlertBottomsheet extends StatelessWidget {
             title: data['heading1'] ?? '',
             fontSize: 24.sp,
             maxLines: 3,
+            color: textGrey,
             fontWeight: FontWeight.w700,
             textAlign: TextAlign.start,
           ),
@@ -90,7 +91,7 @@ class AlertBottomsheet extends StatelessWidget {
           Container(
             padding: EdgeInsets.all(16.w),
             decoration: BoxDecoration(
-              color: Colors.grey.shade50,
+              color:  lightGrey,
               borderRadius: BorderRadius.circular(12.r),
             ),
             child: Column(

@@ -138,7 +138,7 @@ class _RecruitmentFilterState extends State<RecruitmentFilter> {
                     Expanded(
                       child: OutlinedButton(
                         onPressed: () {
-                          Get.back();
+                          Navigator.pop(context);
                           controller.resetFilter();
                         },
                         style: OutlinedButton.styleFrom(

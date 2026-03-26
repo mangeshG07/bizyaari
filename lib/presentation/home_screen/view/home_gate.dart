@@ -54,7 +54,7 @@ class _HomeGateScreenState extends State<HomeGateScreen>
                   Text(
                     controller.statusMessage.value,
                     textAlign: TextAlign.center,
-                    style: const TextStyle(fontSize: 14, color: Colors.black54),
+                    style: TextStyle(fontSize: 14, color: Colors.grey),
                   ),
                   const SizedBox(height: 24),
                   ElevatedButton(
@@ -82,7 +82,7 @@ class _HomeGateScreenState extends State<HomeGateScreen>
                 const SizedBox(height: 16),
                 Text(
                   controller.statusMessage.value,
-                  style: const TextStyle(fontSize: 14, color: Colors.black54),
+                  style: const TextStyle(fontSize: 14, color: Colors.grey),
                 ),
               ],
             ),

@@ -166,7 +166,7 @@ class AppShowCaseWidget extends StatelessWidget {
             width: context.widthPx,
             padding: const EdgeInsets.all(Dimens.largePadding),
             decoration: BoxDecoration(
-              color: Theme.of(context).scaffoldBackgroundColor,
+              color: Theme.of(context).cardColor,
               borderRadius: BorderRadius.circular(Dimens.corners),
             ),
             child: Column(

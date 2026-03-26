@@ -471,11 +471,14 @@ class PartnerDataController extends GetxController {
       final response = await _apiService.acceptDisclaimer(data, userId);
       if (response['common']['status'] == true) {
         /// ✅ FIXED: always close dialog safely
-        Future.delayed(const Duration(milliseconds: 100), () {
-          if (Get.key.currentState?.canPop() ?? false) {
-            Get.back();
-          }
+        WidgetsBinding.instance.addPostFrameCallback((_) async {
+          Future.delayed(const Duration(milliseconds: 100), () {
+            if (Get.key.currentState?.canPop() ?? false) {
+              Get.back();
+            }
+          });
         });
+
         ToastUtils.showSuccessToast(response['common']['message']);
       } else {
         Get.back();

@@ -39,6 +39,7 @@ class HomeGateController extends GetxController {
 
         PopupManager().add(checkInternetAndShowPopup);
         PopupManager().add(getIt<UpdateController>().checkForUpdate);
+        PopupManager().add(homeController.showAlertSheet);
 
         /// ✅ 🔥 ADD SHOWCASE AT LAST
         PopupManager().add(() async {
@@ -53,7 +54,6 @@ class HomeGateController extends GetxController {
             navController.startTopShowcase();
           }
         });
-        PopupManager().add(homeController.showAlertSheet);
 
         /// Optional: wait before showing UI
         await PopupManager().waitUntilDone();
