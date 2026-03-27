@@ -1,9 +1,6 @@
 import 'package:businessbuddy/components/alert_helper.dart';
 import 'package:businessbuddy/utils/alert_bottomsheet.dart';
 import 'package:businessbuddy/utils/exported_path.dart' hide Position;
-import 'package:geolocator/geolocator.dart';
-
-import '../../../common/popup_manager.dart';
 
 @lazySingleton
 class HomeController extends GetxController {

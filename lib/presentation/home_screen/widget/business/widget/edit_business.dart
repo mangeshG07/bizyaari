@@ -912,7 +912,7 @@ class _EditBusinessState extends State<EditBusiness> {
           child: _buildActionButton(
             icon: Icons.close,
             text: 'Close',
-            onPressed: () => Get.back(),
+            onPressed: () => Navigator.of(context).pop(),
             backgroundColor: primaryColor,
             isPrimary: false,
           ),

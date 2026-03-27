@@ -34,13 +34,12 @@ class SplashController extends GetxController {
 
       // 🔥 Navigation Logic (FIXED ORDER)
       if (isValidToken) {
-        print('in Routes.mainScreen');
+
         Get.offAllNamed(Routes.mainScreen);
       } else if (isOnboarded) {
-        print('in Routes.login');
+
         Get.offAllNamed(Routes.login);
       } else {
-        print('in Routes.onboarding');
         Get.offAllNamed(Routes.onboarding);
       }
     });

@@ -191,7 +191,7 @@ class _GlobalSearchState extends State<GlobalSearch> {
                           final category = _controller.categoryList[index];
                           return GestureDetector(
                             onTap: () {
-                              Get.back();
+                              Navigator.of(context).pop();
                               _navigationController.openSubPage(
                                 CategoryList(
                                   categoryId: category['id'].toString(),
@@ -266,7 +266,7 @@ class _GlobalSearchState extends State<GlobalSearch> {
                               }
                             },
                             onTap: () {
-                              Get.back();
+                              Navigator.of(context).pop();
                               _navigationController.openSubPage(
                                 CategoryDetailPage(
                                   title: item['name'] ?? '',
@@ -469,17 +469,17 @@ class _GlobalSearchState extends State<GlobalSearch> {
   }
 
   void _handleViewAllCategories() {
-    Get.back();
+    Navigator.of(context).pop();
     _navigationController.updateTopTab(0);
   }
 
   void _handleViewAllFeeds() {
-    Get.back();
+    Navigator.of(context).pop();
     _navigationController.updateTopTab(1);
   }
 
   void _handleViewAllRequirements() {
-    Get.back();
+    Navigator.of(context).pop();
     _navigationController.updateBottomIndex(2);
   }
 

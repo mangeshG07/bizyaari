@@ -83,7 +83,7 @@ class DisclaimerDialog extends StatelessWidget {
                           onPressed: isChecked.value
                               ? () async {
                                   await getIt<PartnerDataController>()
-                                      .acceptDisclaimer(data);
+                                      .acceptDisclaimer(data,context);
                                 }
                               : null,
                         ),

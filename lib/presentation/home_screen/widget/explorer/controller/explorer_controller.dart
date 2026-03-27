@@ -199,7 +199,11 @@ class ExplorerController extends GetxController {
   final reviewController = TextEditingController();
   final isSubmitting = false.obs;
 
-  Future<void> addReview(String businessId, {bool showLoading = true}) async {
+  Future<void> addReview(
+    String businessId,
+    BuildContext context, {
+    bool showLoading = true,
+  }) async {
     if (showLoading) isSubmitting.value = true;
     final userId = await LocalStorage.getString('user_id') ?? '';
 
@@ -211,7 +215,7 @@ class ExplorerController extends GetxController {
         rating.value.toString(),
       );
       if (response['common']['status'] == true) {
-        Get.back();
+        Navigator.of(context).pop();
         // await getBusinessDetails(businessId, showLoading: false);
         ToastUtils.showSuccessToast(response['common']['message'].toString());
       } else {

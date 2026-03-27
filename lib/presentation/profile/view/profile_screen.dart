@@ -399,7 +399,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ? 'Are you sure you want to unblock this user?'
               : 'Are you sure you want to block this user?',
           onConfirm: () async {
-            Get.back();
+            Navigator.of(context).pop();
             await controller.blockUser(
               controller.profileDetails['id']?.toString() ?? '',
             );

@@ -464,7 +464,11 @@ class PartnerDataController extends GetxController {
   ///////////////////////////////////disclaimer///////////////////////////////
   final isDisLoading = false.obs;
 
-  Future<void> acceptDisclaimer(String data, {bool showLoading = true}) async {
+  Future<void> acceptDisclaimer(
+    String data,
+    BuildContext context, {
+    bool showLoading = true,
+  }) async {
     if (showLoading) isDisLoading.value = true;
     final userId = await LocalStorage.getString('user_id') ?? '';
     try {
@@ -474,14 +478,14 @@ class PartnerDataController extends GetxController {
         WidgetsBinding.instance.addPostFrameCallback((_) async {
           Future.delayed(const Duration(milliseconds: 100), () {
             if (Get.key.currentState?.canPop() ?? false) {
-              Get.back();
+              Navigator.of(context).pop();
             }
           });
         });
 
         ToastUtils.showSuccessToast(response['common']['message']);
       } else {
-        Get.back();
+        Navigator.of(context).pop();
         ToastUtils.showWarningToast(response['common']['message']);
       }
     } catch (e) {

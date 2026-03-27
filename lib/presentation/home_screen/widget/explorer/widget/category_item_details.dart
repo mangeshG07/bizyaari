@@ -998,7 +998,7 @@ class _CategoryDetailPageState extends State<CategoryDetailPage> {
         imageUrl: controller.businessDetails['image'] ?? "",
         onSubmit: (rating, review) async {
           await controller.addReview(
-            controller.businessDetails['id'].toString(),
+            controller.businessDetails['id'].toString(),context
           );
         },
       ),

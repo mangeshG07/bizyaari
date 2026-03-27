@@ -70,7 +70,7 @@ class _BlockUserListState extends State<BlockUserList> {
                                   'Unblock User',
                                   'Are you sure you want to unblock this user?',
                                   onConfirm: () async {
-                                    Get.back();
+                                    Navigator.of(context).pop();
                                     await controller
                                         .blockUser(
                                           block['id']?.toString() ?? '',
