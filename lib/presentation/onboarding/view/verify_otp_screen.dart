@@ -98,7 +98,10 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> with CodeAutoFill {
                 fontSize: 14.sp,
               )
             : GestureDetector(
-                onTap: () {},
+                onTap: () async{
+                  Get.offAllNamed(AllUrl.verifyOtp);
+                  await controller.sendOtpApi();
+                },
                 child: CustomText(
                   title: 'Resend OTP',
                   color: primaryColor,

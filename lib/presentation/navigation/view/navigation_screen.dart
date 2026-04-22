@@ -38,77 +38,72 @@ class _NavigationScreenState extends State<NavigationScreen> {
               ],
             ),
           ),
-          bottomNavigationBar: Container(
-            decoration: BoxDecoration(
-              color: primaryColor,
-              // borderRadius: BorderRadius.circular(16.r),
-              border: Border(
-                top: BorderSide(color: primaryColor, width: 2),
-                bottom: BorderSide(color: primaryColor, width: 2),
-              ),
-              boxShadow: [
-                BoxShadow(
-                  color: theme.brightness == Brightness.light
-                      ? Colors.black.withValues(alpha: 0.07)
-                      : Colors.white.withValues(alpha: 0.08),
-                  blurRadius: 10,
-                  offset: const Offset(0, -2),
+          bottomNavigationBar: SafeArea(
+            child: Container(
+              decoration: BoxDecoration(
+                color: primaryColor,
+                border: Border(
+                  top: BorderSide(color: primaryColor, width: 2),
+                  bottom: BorderSide(color: primaryColor, width: 2),
                 ),
-              ],
-            ),
-            child: ClipRRect(
-              // borderRadius: BorderRadius.vertical(
-              //   top: Radius.circular(16.r),
-              //
-              //   // topLeft: Radius.circular(16.r),
-              //   // topRight: Radius.circular(16.r),
-              // ),
-              child: BottomNavigationBar(
-                type: BottomNavigationBarType.fixed,
-                backgroundColor: navBackground,
-                selectedFontSize: 12,
-                unselectedFontSize: 11,
-                iconSize: 22,
-                selectedItemColor: controller.currentIndex.value == -1
-                    ? Colors.grey
-                    : primaryColor,
-                unselectedItemColor: textGrey,
-                showUnselectedLabels: true,
-                selectedLabelStyle: const TextStyle(
-                  fontWeight: FontWeight.w600,
-                  fontSize: 12,
-                ),
-                currentIndex: controller.currentIndex.value == -1
-                    ? 0
-                    : controller.currentIndex.value,
-                onTap: controller.updateBottomIndex,
-                items: [
-                  _buildNavItem(
-                    HugeIcons.strokeRoundedHome01,
-                    'Home',
-                    0,
-                    controller.currentIndex.value == 0,
-                  ),
-                  _buildNavItem(
-                    HugeIcons.strokeRoundedMessage02,
-                    'Inbox',
-                    1,
-                    controller.currentIndex.value == 1,
-                  ),
-                  _buildNavItem(
-                    HugeIcons.strokeRoundedUserMultiple02,
-                    'Business Partner',
-                    2,
-                    controller.currentIndex.value == 2,
-                  ),
-
-                  _buildNavItem(
-                    HugeIcons.strokeRoundedTag01,
-                    'Special Offers',
-                    3,
-                    controller.currentIndex.value == 3,
+                boxShadow: [
+                  BoxShadow(
+                    color: theme.brightness == Brightness.light
+                        ? Colors.black.withValues(alpha: 0.07)
+                        : Colors.white.withValues(alpha: 0.08),
+                    blurRadius: 10,
+                    offset: const Offset(0, -2),
                   ),
                 ],
+              ),
+              child: ClipRRect(
+                child: BottomNavigationBar(
+                  type: BottomNavigationBarType.fixed,
+                  backgroundColor: navBackground,
+                  selectedFontSize: 12,
+                  unselectedFontSize: 11,
+                  iconSize: 22,
+                  selectedItemColor: controller.currentIndex.value == -1
+                      ? Colors.grey
+                      : primaryColor,
+                  unselectedItemColor: textGrey,
+                  showUnselectedLabels: true,
+                  selectedLabelStyle: const TextStyle(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 12,
+                  ),
+                  currentIndex: controller.currentIndex.value == -1
+                      ? 0
+                      : controller.currentIndex.value,
+                  onTap: controller.updateBottomIndex,
+                  items: [
+                    _buildNavItem(
+                      HugeIcons.strokeRoundedHome01,
+                      'Home',
+                      0,
+                      controller.currentIndex.value == 0,
+                    ),
+                    _buildNavItem(
+                      HugeIcons.strokeRoundedMessage02,
+                      'Inbox',
+                      1,
+                      controller.currentIndex.value == 1,
+                    ),
+                    _buildNavItem(
+                      HugeIcons.strokeRoundedUserMultiple02,
+                      'Business Partner',
+                      2,
+                      controller.currentIndex.value == 2,
+                    ),
+
+                    _buildNavItem(
+                      HugeIcons.strokeRoundedTag01,
+                      'Special Offers',
+                      3,
+                      controller.currentIndex.value == 3,
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
@@ -146,9 +141,10 @@ class _NavigationScreenState extends State<NavigationScreen> {
         SizedBox(height: 2),
         AutoSizeText(
           label,
-          style: TextStyle(fontSize: 13),
-          minFontSize: 13,
-          maxLines: 1,
+          style: TextStyle(fontSize: 12, height: 0.9),
+          minFontSize: 10,
+          maxLines: 2,
+          textAlign: TextAlign.center,
           overflow: TextOverflow.ellipsis,
         ),
       ],
@@ -193,18 +189,10 @@ class _NavigationScreenState extends State<NavigationScreen> {
           AutoSizeText(
             label,
             style: TextStyle(fontSize: 14),
-            minFontSize: 14,
+            minFontSize: 10,
             maxLines: 4,
             overflow: TextOverflow.ellipsis,
           ),
-
-          // Text(
-          //   label,
-          //   maxLines: 2,
-          //   overflow: TextOverflow.ellipsis,
-          //   textAlign: TextAlign.center,
-          //   style: TextStyle(fontSize: 11.sp),
-          // ),
         ],
       ),
       label: '',

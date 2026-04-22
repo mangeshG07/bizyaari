@@ -19,12 +19,6 @@ class HomeController extends GetxController {
 
   final _initialApiCalled = false.obs;
 
-
-
-
-
-
-
   @override
   void onInit() {
     super.onInit();
