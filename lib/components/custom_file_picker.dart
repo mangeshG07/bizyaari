@@ -20,7 +20,7 @@ class CustomFilePicker {
   }
 
   static Future<File?> pickDocument() async {
-    FilePickerResult? result = await FilePicker.platform.pickFiles();
+    final result = await FilePicker.platform.pickFiles();
     if (result != null && result.files.single.path != null) {
       return File(result.files.single.path!);
     }

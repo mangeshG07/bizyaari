@@ -42,6 +42,13 @@ class _NavigationScreenState extends State<NavigationScreen> {
             child: Container(
               decoration: BoxDecoration(
                 color: primaryColor,
+                // gradient: LinearGradient(
+                //   colors: Theme.of(context).brightness == Brightness.light
+                //       ? [primaryColor, Colors.white]
+                //       : [primaryColor, Colors.white],
+                //   begin: Alignment.bottomCenter,
+                //   end: Alignment.topCenter,
+                // ),
                 border: Border(
                   top: BorderSide(color: primaryColor, width: 2),
                   bottom: BorderSide(color: primaryColor, width: 2),
@@ -58,15 +65,17 @@ class _NavigationScreenState extends State<NavigationScreen> {
               ),
               child: ClipRRect(
                 child: BottomNavigationBar(
+                  elevation: 0,
                   type: BottomNavigationBarType.fixed,
-                  backgroundColor: navBackground,
+                  // backgroundColor: navBackground,
+                  backgroundColor: Colors.transparent,
                   selectedFontSize: 12,
                   unselectedFontSize: 11,
                   iconSize: 22,
                   selectedItemColor: controller.currentIndex.value == -1
                       ? Colors.grey
                       : primaryColor,
-                  unselectedItemColor: textGrey,
+                  unselectedItemColor: Colors.white,
                   showUnselectedLabels: true,
                   selectedLabelStyle: const TextStyle(
                     fontWeight: FontWeight.w600,
@@ -125,9 +134,10 @@ class _NavigationScreenState extends State<NavigationScreen> {
       children: [
         Container(
           decoration: BoxDecoration(
-            // color: isSelected ? primaryColor : Colors.transparent,
+            color: isSelected ? Colors.white : Colors.transparent,
             border: Border.all(
-              color: isSelected ? primaryColor : Colors.transparent,
+              // color: isSelected ? primaryColor : Colors.transparent,
+              color: isSelected ? Colors.white : Colors.transparent,
             ),
             borderRadius: BorderRadius.circular(8.r),
           ),
@@ -135,16 +145,18 @@ class _NavigationScreenState extends State<NavigationScreen> {
           child: HugeIcon(
             size: Get.width * 0.06,
             icon: icon,
-            color: isSelected ? primaryColor : primaryBlack,
+            color: isSelected ? primaryColor : Colors.white,
+            // color: isSelected ? Colors.white : Colors.white,
           ),
         ),
         SizedBox(height: 2),
         AutoSizeText(
           label,
-          style: TextStyle(fontSize: 12, height: 0.9),
+          style: TextStyle(fontSize: 12, height: 0.9, color: Colors.white),
           minFontSize: 10,
           maxLines: 2,
           textAlign: TextAlign.center,
+
           overflow: TextOverflow.ellipsis,
         ),
       ],
@@ -172,9 +184,11 @@ class _NavigationScreenState extends State<NavigationScreen> {
         children: [
           Container(
             decoration: BoxDecoration(
-              border: Border.all(
-                color: isSelected ? primaryColor : Colors.transparent,
-              ),
+              color: isSelected ? Colors.white : Colors.transparent,
+              // border: Border.all(
+              //   // color: isSelected ? primaryColor : Colors.transparent,
+              //   color: isSelected ? Colors.white : Colors.transparent,
+              // ),
               // color: isSelected ? primaryColor : Colors.transparent,
               borderRadius: BorderRadius.circular(8.r),
             ),
@@ -182,13 +196,14 @@ class _NavigationScreenState extends State<NavigationScreen> {
             child: HugeIcon(
               size: iconSize ?? Get.width * 0.06,
               icon: icon,
-              color: isSelected ? primaryColor : primaryBlack,
+              color: isSelected ? primaryColor : Colors.white,
+              // color: isSelected ? Colors.white : primaryBlack,
             ),
           ),
           SizedBox(height: 2),
           AutoSizeText(
             label,
-            style: TextStyle(fontSize: 14),
+            style: TextStyle(fontSize: 14, color: Colors.white),
             minFontSize: 10,
             maxLines: 4,
             overflow: TextOverflow.ellipsis,

@@ -48,9 +48,9 @@ class DioClient {
           return handler.next(options);
         },
         onResponse: (response, handler) async {
-          // if (kDebugMode) {
-          //   log('✅ Response: ${response.statusCode} → ${response.data}');
-          // }
+          if (kDebugMode) {
+            log('✅ Response: ${response.statusCode} → ${response.data}');
+          }
           // final requestPath = response.requestOptions.path;
 
           if (response.data.containsKey('user_login') &&
@@ -83,11 +83,11 @@ class DioClient {
           return handler.next(response);
         },
         onError: (error, handler) {
-          // if (kDebugMode) {
-          //   debugPrint(
-          //     '❌ Dio Error [${error.response?.statusCode}] → ${error.message}',
-          //   );
-          // }
+          if (kDebugMode) {
+            debugPrint(
+              '❌ Dio Error [${error.response?.statusCode}] → ${error.message}',
+            );
+          }
           return handler.next(error);
         },
       ),

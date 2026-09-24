@@ -23,7 +23,7 @@ class NotificationService {
   Future<void> init() async {
     await requestNotificationPermissions();
     await _initPushNotifications();
-    await _initLocalNotifications();
+    // await _initLocalNotifications();
   }
 
   /// Request notification permissions
